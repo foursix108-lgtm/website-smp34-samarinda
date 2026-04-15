@@ -136,10 +136,10 @@ h1, h2, h3, h4, h5 { font-family: 'Sora', sans-serif; }
 /* Hero */
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, rgba(15,23,42,.82) 0%, rgba(26,60,114,.75) 100%),
+  background: radial-gradient(circle at top left, rgba(96,165,250,.18), transparent 32%),
+    linear-gradient(135deg, rgba(15,23,42,.9) 0%, rgba(26,60,114,.88) 100%),
     url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80&w=1920');
   background-size: cover;
-  background-attachment: fixed;
   background-position: center;
   display: flex; align-items: center;
   padding-top: 72px;
@@ -344,15 +344,15 @@ h1, h2, h3, h4, h5 { font-family: 'Sora', sans-serif; }
   animation: scaleIn .3s cubic-bezier(.4,0,.2,1);
 }
 .login-modal-header {
-  background: var(--primary);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
   padding: 2.5rem 2.5rem 2rem;
   position: relative;
 }
 .login-modal-header .lmh-logo {
   width: 56px; height: 56px;
-  border-radius: 14px;
+  border-radius: 18px;
   object-fit: cover;
-  border: 3px solid rgba(255,255,255,.3);
+  border: 3px solid rgba(255,255,255,.25);
   margin-bottom: 1rem;
 }
 .login-modal-header h2 {
@@ -360,35 +360,35 @@ h1, h2, h3, h4, h5 { font-family: 'Sora', sans-serif; }
   font-size: 1.5rem; font-weight: 800;
   color: #fff;
 }
-.login-modal-header p { font-size: .85rem; color: rgba(255,255,255,.65); margin-top: .25rem; }
+.login-modal-header p { font-size: .9rem; color: rgba(255,255,255,.8); margin-top: .4rem; }
 .login-modal-close {
   position: absolute; top: 1.25rem; right: 1.25rem;
-  background: rgba(255,255,255,.15); border: none; cursor: pointer;
-  color: #fff; width: 32px; height: 32px;
+  background: rgba(255,255,255,.16); border: none; cursor: pointer;
+  color: #fff; width: 34px; height: 34px;
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  transition: background .2s;
-  font-size: .85rem;
+  transition: background .2s, transform .2s;
+  font-size: .95rem;
 }
-.login-modal-close:hover { background: rgba(255,255,255,.28); }
+.login-modal-close:hover { background: rgba(255,255,255,.28); transform: scale(1.05); }
 .login-modal-body { padding: 2rem 2.5rem 2.5rem; }
-.tab-bar { display: flex; background: var(--bg); border-radius: var(--radius); padding: 4px; margin-bottom: 1.75rem; }
+.tab-bar { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; background: rgba(255,255,255,.95); border-radius: calc(var(--radius) - 4px); padding: 5px; margin-bottom: 1.75rem; }
 .tab-btn {
-  flex: 1; border: none; cursor: pointer; background: none;
-  padding: .6rem; border-radius: calc(var(--radius) - 4px);
+  flex: 1; border: none; cursor: pointer; background: transparent;
+  padding: .9rem .8rem; border-radius: calc(var(--radius) - 4px);
   font-family: 'Sora', sans-serif;
   font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
   color: var(--text-muted);
   transition: all .2s;
 }
-.tab-btn.active { background: var(--surface); color: var(--primary); box-shadow: 0 2px 8px rgba(0,0,0,.1); }
+.tab-btn.active { background: var(--surface); color: var(--primary); box-shadow: 0 4px 20px rgba(15,23,42,.08); }
 .form-group { margin-bottom: 1.1rem; }
 .form-group label { display: block; font-size: .72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: .1em; margin-bottom: .5rem; }
 .form-input {
-  width: 100%; padding: .85rem 1rem;
-  background: var(--bg); border: 1.5px solid var(--border);
+  width: 100%; padding: .95rem 1rem;
+  background: #f8fafc; border: 1.5px solid #e2e8f0;
   border-radius: var(--radius);
-  font-family: 'DM Sans', sans-serif; font-size: .9rem; color: var(--text);
+  font-family: 'DM Sans', sans-serif; font-size: .95rem; color: var(--text);
   transition: border-color .2s, box-shadow .2s;
   outline: none;
 }
@@ -396,23 +396,25 @@ h1, h2, h3, h4, h5 { font-family: 'Sora', sans-serif; }
 .form-input.input-error { border-color: var(--danger); }
 .input-icon-wrap { position: relative; }
 .input-icon-wrap .form-input { padding-left: 2.75rem; }
-.input-icon-wrap .input-icon { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: .9rem; }
-.input-icon-wrap .input-toggle { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-light); font-size: .85rem; }
-.error-msg { font-size: .75rem; color: var(--danger); font-weight: 600; margin-top: .4rem; display: flex; align-items: center; gap: .35rem; }
+.input-icon-wrap .input-icon { position: absolute; left: .9rem; top: 50%; transform: translateY(-50%); color: var(--text-light); font-size: .95rem; }
+.input-icon-wrap .input-toggle { position: absolute; right: .9rem; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-light); font-size: .95rem; }
+.error-msg { font-size: .82rem; color: var(--danger); font-weight: 600; margin-top: .4rem; display: flex; align-items: center; gap: .35rem; }
 .btn-submit {
-  width: 100%; padding: .95rem;
+  width: 100%; padding: 1rem;
   background: var(--primary);
   color: #fff; border: none; cursor: pointer;
   font-family: 'Sora', sans-serif;
-  font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
-  border-radius: var(--radius);
+  font-size: .92rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  border-radius: calc(var(--radius) + 4px);
   margin-top: 1.25rem;
   transition: background .2s, transform .15s, box-shadow .2s;
-  box-shadow: 0 6px 20px rgba(26,60,114,.25);
+  box-shadow: 0 8px 26px rgba(26,60,114,.14);
   display: flex; align-items: center; justify-content: center; gap: .5rem;
 }
-.btn-submit:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 8px 28px rgba(37,99,235,.3); }
-.login-hint { font-size: .75rem; color: var(--text-light); text-align: center; margin-top: 1.25rem; line-height: 1.6; }
+.btn-submit:hover { background: var(--primary-light); transform: translateY(-1px); box-shadow: 0 10px 32px rgba(37,99,235,.2); }
+.login-hint { font-size: .78rem; color: var(--text-light); text-align: center; margin-top: 1.25rem; line-height: 1.7; }
+.login-hint a { color: var(--primary-light); text-decoration: none; font-weight: 700; }
+.login-hint a:hover { text-decoration: underline; }
 .login-hint strong { color: var(--text-muted); }
 
 /* ── DASHBOARD ── */
