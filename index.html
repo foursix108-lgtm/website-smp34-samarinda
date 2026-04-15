@@ -231,7 +231,7 @@
           </div>
           <div x-show="loginError" class="error-msg"><i class="fa-solid fa-circle-exclamation"></i><span x-text="loginError"></span></div>
           <button @click="login()" class="btn-submit"><i class="fa-solid fa-right-to-bracket"></i> Masuk sebagai Siswa</button>
-          <p class="login-hint">Demo: NIS <strong>2024001</strong> / Password <strong>siswa123</strong><br>Atau nama: <strong>Misael Apriansyah Alniko</strong></p>
+          <button @click="openAddStudent()" class="btn-submit"><i class="fa-solid fa-user-plus"></i> Registrasi</button>
         </div>
       </template>
 
@@ -254,7 +254,7 @@
           </div>
           <div x-show="loginError" class="error-msg"><i class="fa-solid fa-circle-exclamation"></i><span x-text="loginError"></span></div>
           <button @click="login()" class="btn-submit" style="background:var(--primary-light)"><i class="fa-solid fa-user-shield"></i> Masuk sebagai Admin</button>
-          <p class="login-hint">Demo admin: <strong>admin</strong> / <strong>admin123</strong></p>
+          
         </div>
       </template>
     </div>
@@ -881,7 +881,7 @@
 <div x-show="showStudentModal" x-cloak class="modal-container" @click.self="closeStudentModal()">
   <div class="modal-box">
     <div class="modal-hd">
-      <h3 x-text="isEditingStudent ? 'Edit Data Siswa' : 'Tambah Siswa Baru'"></h3>
+      <h3 x-text="isEditingStudent ? 'Edit Data Siswa' : 'Registrasi'"></h3>
       <button @click="closeStudentModal()" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <template x-if="studentForm">
