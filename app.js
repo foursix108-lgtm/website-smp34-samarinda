@@ -163,10 +163,13 @@ function schoolApp() {
     schoolName: 'SMPN 34 Samarinda',
     appLogo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Camponotus_flavomarginatus_ant.jpg/640px-Camponotus_flavomarginatus_ant.jpg',
 
+    authMode: 'login', // 'login' | 'register'
     showLogin: false,
     loginTab: 'siswa', // 'siswa' | 'admin'
     loginForm: { u: '', p: '' },
+    registerForm: { name:'', nis:'', kelas:'VIII-A', password:'', confirm:'', email:'', phone:'', alamat:'' },
     loginError: '',
+    registerError: '',
     showPassword: false,
 
     isLoggedIn: false,
@@ -298,6 +301,42 @@ function schoolApp() {
     // ── Navigation ──
     goView(v) { this.view = v; this.selectedCourse = null; },
     openCourse(c) { this.selectedCourse = c; },
+    openLogin(tab = 'siswa') { this.authMode = 'login'; this.showLogin = true; this.loginTab = tab; this.loginError = ''; this.registerError = ''; },
+    openRegister() { this.authMode = 'register'; this.showLogin = true; this.loginTab = 'siswa'; this.loginError = ''; this.registerError = ''; },
+    register() {
+      this.registerError = '';
+      const name = this.registerForm.name.trim();
+      const nis = this.registerForm.nis.trim();
+      const password = this.registerForm.password;
+      const confirm = this.registerForm.confirm;
+      if (!name || !nis || !password || !confirm) { this.registerError = 'Semua kolom wajib diisi.'; return; }
+      if (password.length < 6) { this.registerError = 'Password minimal 6 karakter.'; return; }
+      if (password !== confirm) { this.registerError = 'Konfirmasi password tidak cocok.'; return; }
+      if (this.studentDatabase.some(s => s.nis === nis || s.name.toLowerCase() === name.toLowerCase())) {
+        this.registerError = 'NIS atau nama sudah terdaftar.'; return;
+      }
+      const photo = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(name) + '&background=2563eb&color=fff&size=128';
+      const student = {
+        name,
+        nis,
+        kelas: this.registerForm.kelas || 'VIII-A',
+        password,
+        photo,
+        email: this.registerForm.email,
+        phone: this.registerForm.phone,
+        alamat: this.registerForm.alamat,
+      };
+      this.studentDatabase.push(student);
+      this.saveState();
+      this.isLoggedIn = true;
+      this.role = 'Siswa';
+      this.user = { ...student };
+      this.view = 'home';
+      this.showLogin = false;
+      this.loginForm = { u:'', p:'' };
+      this.registerForm = { name:'', nis:'', kelas:'VIII-A', password:'', confirm:'', email:'', phone:'', alamat:'' };
+      this.showToast('Akun baru berhasil dibuat dan Anda sudah masuk.', 'success');
+    },
 
     // ── Toast ──
     showToast(msg, type = '') {
